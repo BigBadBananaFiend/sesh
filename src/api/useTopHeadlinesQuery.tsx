@@ -15,5 +15,8 @@ export const useTopHeadlinesQuery = (
   const queryKey = [`news/headlines`];
   const queryFn = () => fetcher();
 
-  return useQuery(queryKey, queryFn, { ...options });
+  return useQuery(queryKey, queryFn, {
+    refetchOnWindowFocus: false,
+    ...options,
+  });
 };

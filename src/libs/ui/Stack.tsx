@@ -1,19 +1,16 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
 import { FC } from "react";
 import styled from "@emotion/styled";
-import { IBoxProps } from "./Box";
+import { IBoxProps, StyledBox } from "./Box";
 
 interface IStackProps
   extends Pick<
     IBoxProps,
-    "gap" | "justifyContent" | "alignItems" | "children"
+    "gap" | "justifyContent" | "alignItems" | "children" | "width" | "height"
   > {}
 
-const StyledStack = styled.div<IStackProps>`
+const StyledStack = styled(StyledBox)<IStackProps>`
   display: flex;
-  gap: ${(props) => props.gap ?? "12px"};
-  justify-content: ${(props) => props.justifyContent};
-  align-items: ${(props) => props.alignItems};
 `;
 
 const StyledVStack = styled(StyledStack)`
@@ -25,11 +22,21 @@ const StyledHStack = styled(StyledStack)`
 `;
 
 export const VStack: FC<IStackProps> = ({
+  gap,
   children,
   ...props
-}: IStackProps) => <StyledVStack {...props}>{children}</StyledVStack>;
+}: IStackProps) => (
+  <StyledVStack gap={gap ?? "12px"} {...props}>
+    {children}
+  </StyledVStack>
+);
 
 export const HStack: FC<IStackProps> = ({
+  gap,
   children,
   ...props
-}: IStackProps) => <StyledHStack {...props}>{children}</StyledHStack>;
+}: IStackProps) => (
+  <StyledHStack gap={gap ?? "12px"} {...props}>
+    {children}
+  </StyledHStack>
+);

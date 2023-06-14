@@ -1,5 +1,6 @@
 import { FC } from "react";
-import { Box } from "../libs";
+import { Box, HStack, VStack } from "../libs";
+import { BsNewspaper } from "react-icons/bs";
 
 export const Topbar: FC = () => {
   return (
@@ -13,7 +14,10 @@ export const Topbar: FC = () => {
       alignItems="center"
       boxShadow="rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;"
     >
-      <h4>News fetcher</h4>
+      <HStack gap="18px" alignItems="center">
+        <BsNewspaper size={25} />
+        <h4>24 hours old news</h4>
+      </HStack>
     </Box>
   );
 };

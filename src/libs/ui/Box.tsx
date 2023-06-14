@@ -5,6 +5,7 @@ export interface IBoxProps {
   display?: "flex" | "block" | "inline";
   margin?: string;
   padding?: string;
+  flexDirection?: "column" | "row";
   backgroundColor?: string;
   gap?: string;
   justifyContent?: "start" | "center" | "space-between" | "space-around";
@@ -20,6 +21,7 @@ export interface IBoxProps {
 export const StyledBox = styled.div<IBoxProps>`
   display: ${(props) => props.display ?? "block"};
   margin: ${(props) => props.margin};
+  flex-direction: ${(props) => props.flexDirection};
   padding: ${(props) => props.padding};
   background-color: ${(props) => props.backgroundColor};
   gap: ${(props) => props.gap};

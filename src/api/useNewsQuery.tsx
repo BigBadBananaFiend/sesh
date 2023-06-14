@@ -21,5 +21,9 @@ export const useNewsQuery = (
   const queryKey = [`news/${searchTerm}`];
   const queryFn = () => fetcher({ searchTerm });
 
-  return useQuery(queryKey, queryFn, { ...options });
+  return useQuery(queryKey, queryFn, {
+    enabled: false,
+    refetchOnWindowFocus: false,
+    ...options,
+  });
 };
