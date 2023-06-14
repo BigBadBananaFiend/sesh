@@ -2,14 +2,14 @@ import { Global } from "@emotion/react";
 import { globalStyle } from "./globalStyle";
 import { useNewsQuery } from "./api/useNewsQuery";
 import { FC, useEffect } from "react";
+import { Home } from "./pages/Home";
 
 function App() {
   return (
     <>
       <Global styles={globalStyle} />
+      <Home />
       {Fetch()}
-      <h2>hello</h2>
-      <p>hello</p>
     </>
   );
 }

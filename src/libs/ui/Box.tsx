@@ -1,15 +1,20 @@
-import { FC, ReactElement } from "react";
+import { FC, ReactNode } from "react";
 import styled from "@emotion/styled";
 
 export interface IBoxProps {
   display?: "flex" | "block" | "inline";
-  margin?: number;
-  padding?: number;
+  margin?: string;
+  padding?: string;
   backgroundColor?: string;
-  gap?: number;
+  gap?: string;
   justifyContent?: "start" | "center" | "space-between" | "space-around";
   alignItems?: "stretch" | "center" | "start" | "end";
-  children: ReactElement;
+  children: ReactNode;
+  width?: string;
+  height?: string;
+  position?: "relative" | "absolute" | "sticky" | "fixed";
+  overflow?: "auto" | "hidden";
+  boxShadow?: string;
 }
 
 export const StyledBox = styled.div<IBoxProps>`
@@ -17,9 +22,14 @@ export const StyledBox = styled.div<IBoxProps>`
   margin: ${(props) => props.margin};
   padding: ${(props) => props.padding};
   background-color: ${(props) => props.backgroundColor};
-  gap: ${(props) => `${props.gap}px`};
+  gap: ${(props) => props.gap};
   justify-content: ${(props) => props.justifyContent};
   align-items: ${(props) => props.alignItems};
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+  position: ${(props) => props.position};
+  overflow: ${(props) => props.overflow};
+  box-shadow: ${(props) => props.boxShadow};
 `;
 
 export const Box: FC<IBoxProps> = ({ children, ...props }: IBoxProps) => (

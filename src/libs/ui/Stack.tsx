@@ -11,7 +11,7 @@ interface IStackProps
 
 const StyledStack = styled.div<IStackProps>`
   display: flex;
-  gap: ${(props) => `${props.gap}px` ?? "12px"};
+  gap: ${(props) => props.gap ?? "12px"};
   justify-content: ${(props) => props.justifyContent};
   align-items: ${(props) => props.alignItems};
 `;

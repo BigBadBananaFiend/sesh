@@ -3,23 +3,17 @@ import axios, { AxiosError } from "axios";
 import { ENDPOINTS } from "./endpoints";
 import { IResponse } from "./types";
 
-interface IFetcherParams {
-  searchTerm: string;
-}
-
-const fetcher = async ({ searchTerm }: IFetcherParams): Promise<IResponse> => {
-  const response = await axios.get(ENDPOINTS.news(searchTerm));
+const fetcher = async (): Promise<IResponse> => {
+  const response = await axios.get(ENDPOINTS.headlines);
 
   return response.data as IResponse;
 };
 
-export const useNewsQuery = (
-  params: IFetcherParams,
+export const useTopHeadlinesQuery = (
   options?: QueryOptions<IResponse, AxiosError>
 ): UseQueryResult<IResponse, AxiosError> => {
-  const { searchTerm } = params;
-  const queryKey = [`news/${searchTerm}`];
-  const queryFn = () => fetcher({ searchTerm });
+  const queryKey = [`news/headlines`];
+  const queryFn = () => fetcher();
 
   return useQuery(queryKey, queryFn, { ...options });
 };
