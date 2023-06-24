@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { useTopHeadlinesQuery } from "../api/useTopHeadlinesQuery";
 import { Box } from "../libs";
+import { NewsBox } from "../components/NewsBox";
 
 export const TopHeadlines: FC = () => {
   const { isLoading, isError, data } = useTopHeadlinesQuery();
@@ -11,13 +12,19 @@ export const TopHeadlines: FC = () => {
     return <>Loading</>;
   }
 
-  if (isError) {
+  if (isError || !data) {
     return <>Error fetching data</>;
   }
 
   return (
     <Box>
-      <h2>Top headlines</h2>
+      {data.articles.map((d) => (
+        <NewsBox
+          title={d.title}
+          author={d.author}
+          description={d.description}
+        />
+      ))}
     </Box>
   );
 };
