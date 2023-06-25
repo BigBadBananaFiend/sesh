@@ -2,11 +2,22 @@ import { FC } from "react";
 import { useTopHeadlinesQuery } from "../api/useTopHeadlinesQuery";
 import { Box } from "../libs";
 import { NewsBox } from "../components/NewsBox";
+import styled from "@emotion/styled";
+import { IArticle } from "../api/types";
+
+const StyledBox = styled.div`
+  width: 100%;
+  display: grid;
+  padding: 40px 120px;
+  grid-template-columns: repeat(auto-fit, 550px);
+  grid-template-rows: repeat(300px);
+  justify-items: center;
+  gap: 20px;
+  justify-content: center;
+`;
 
 export const TopHeadlines: FC = () => {
   const { isLoading, isError, data } = useTopHeadlinesQuery();
-
-  console.log(data);
 
   if (isLoading) {
     return <>Loading</>;
@@ -16,15 +27,18 @@ export const TopHeadlines: FC = () => {
     return <>Error fetching data</>;
   }
 
+  //
   return (
-    <Box>
-      {data.articles.map((d) => (
+    <StyledBox>
+      {data.articles.map((a) => (
         <NewsBox
-          title={d.title}
-          author={d.author}
-          description={d.description}
+          title={a.title}
+          author={a.author}
+          description={a.description}
+          url={a.url}
+          urlToImage={a.urlToImage}
         />
       ))}
-    </Box>
+    </StyledBox>
   );
 };

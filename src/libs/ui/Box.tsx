@@ -2,7 +2,7 @@ import { FC, ReactNode } from "react";
 import styled from "@emotion/styled";
 
 export interface IBoxProps {
-  display?: "flex" | "block" | "inline";
+  display?: "flex" | "block" | "inline" | "inline-block";
   margin?: string;
   padding?: string;
   flexDirection?: "column" | "row";
@@ -15,7 +15,9 @@ export interface IBoxProps {
   height?: string;
   position?: "relative" | "absolute" | "sticky" | "fixed";
   overflow?: "auto" | "hidden";
+  borderRadius?: string;
   boxShadow?: string;
+  id?: string;
 }
 
 export const StyledBox = styled.div<IBoxProps>`
@@ -32,6 +34,8 @@ export const StyledBox = styled.div<IBoxProps>`
   position: ${(props) => props.position};
   overflow: ${(props) => props.overflow};
   box-shadow: ${(props) => props.boxShadow};
+  border-radius: ${(props) => props.borderRadius};
+  box-sizing: border-box;
 `;
 
 export const Box: FC<IBoxProps> = ({ children, ...props }: IBoxProps) => (

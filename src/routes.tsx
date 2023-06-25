@@ -8,10 +8,15 @@ export default () => (
   <BrowserRouter>
     <Routes>
       <Route path={"/"} element={<AppWrapper />}>
-        <Route index={true} element={<Navigate to={"/top-headlines"} />} />
-        <Route path={"top-headlines"} element={<TopHeadlines />} />
-        <Route path={"news-search"} element={<NewsSearch />} />
+        <Route index={true} element={<Navigate to={"headlines"} />} />
+        <Route path={"headlines"} element={<TopHeadlines />} />
+        <Route path={"search"} element={<NewsSearch />} />
       </Route>
     </Routes>
   </BrowserRouter>
 );
+
+export const routes = {
+  headlines: "/headlines",
+  search: "/search",
+};
