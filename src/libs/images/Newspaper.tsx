@@ -1,12 +1,10 @@
-import * as React from "react";
-export const Newspaper = (props) => (
+export const Newspaper = ({ size }: { size?: number }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"
-    width="200px"
-    height="200px"
-    viewBox="0 0 200 200"
-    {...props}
+    width={size ? `${size}px` : `200px`}
+    height={size ? `${size}px` : `200px`}
+    viewBox={"0 0 200 200"}
   >
     <g id="surface1">
       <path

@@ -6,7 +6,14 @@ import { IBoxProps, StyledBox } from "./Box";
 interface IStackProps
   extends Pick<
     IBoxProps,
-    "gap" | "justifyContent" | "alignItems" | "children" | "width" | "height"
+    | "gap"
+    | "justifyContent"
+    | "alignItems"
+    | "children"
+    | "width"
+    | "height"
+    | "alignSelf"
+    | "justifySelf"
   > {}
 
 const StyledStack = styled(StyledBox)<IStackProps>`

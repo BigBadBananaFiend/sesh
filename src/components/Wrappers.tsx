@@ -1,7 +1,8 @@
 import { FC, useEffect } from "react";
-import { Box, Newspaper, VStack } from "../libs";
+import { Box } from "../libs";
 import { Outlet } from "react-router";
-import { Topbar } from "../components/Topbar";
+import { Topbar } from "./Topbar";
+import styled from "@emotion/styled";
 
 export const AppWrapper: FC = () => {
   useEffect(() => {
@@ -9,7 +10,6 @@ export const AppWrapper: FC = () => {
     const content = document.getElementById("content");
 
     const callback = () => {
-      console.log("yeah");
       if (content && topbar) {
         if (content?.scrollTop > 10) {
           topbar.style.boxShadow = "rgba(0, 0, 0, 0.15) 0 5px 15px";
@@ -31,25 +31,37 @@ export const AppWrapper: FC = () => {
   }, []);
 
   return (
-    <Box
-      width="100vw"
-      height="100vh"
-      overflow="hidden"
-      display="flex"
-      flexDirection="column"
-      backgroundColor="#FDF5DF"
-    >
-      <Topbar />
+    <Box width="100vw" height="100vh" display="flex" backgroundColor="#FDF5DF">
       <Box
-        height="calc(100vh - 80px)"
-        margin="80px 0 0"
         display="flex"
-        justifyContent="center"
-        overflow="auto"
-        id="content"
+        flexDirection="column"
+        height="100%"
+        width="100%"
+        overflow="hidden"
       >
-        <Outlet />
+        <Topbar />
+        <Box margin="80px 0 0" overflow="auto" id="content">
+          <Outlet />
+        </Box>
       </Box>
     </Box>
   );
 };
+
+export const NewsWrapper = styled(Box)`
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-rows: auto;
+  justify-items: center;
+  gap: 40px;
+  justify-content: start;
+`;
+
+export const ContentWrapper = styled(Box)`
+  width: 100%;
+  display: flex;
+  padding: 40px 80px;
+  flex-direction: column;
+  gap: 20px;
+`;

@@ -10,6 +10,8 @@ export interface IBoxProps {
   gap?: string;
   justifyContent?: "start" | "center" | "space-between" | "space-around";
   alignItems?: "stretch" | "center" | "start" | "end";
+  justifySelf?: "start" | "end" | "center";
+  alignSelf?: "start" | "end" | "center";
   children: ReactNode;
   width?: string;
   height?: string;
@@ -35,6 +37,8 @@ export const StyledBox = styled.div<IBoxProps>`
   overflow: ${(props) => props.overflow};
   box-shadow: ${(props) => props.boxShadow};
   border-radius: ${(props) => props.borderRadius};
+  justify-self: ${(props) => props.justifySelf};
+  align-self: ${(props) => props.alignSelf};
   box-sizing: border-box;
 `;
 

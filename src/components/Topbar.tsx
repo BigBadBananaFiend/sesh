@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Box, HStack, VStack, colors } from "../libs";
+import { Box, HStack, Newspaper, colors } from "../libs";
 import styled from "@emotion/styled";
 import { useMatch, useNavigate } from "react-router-dom";
 import { routes } from "../routes";
@@ -13,8 +13,6 @@ const StyledNavBtn = styled("button")<IStyledNavBtnProps>`
   font-size: 20px;
   color: ${colors.red.regular};
   font-weight: ${(props) => (props.isActive ? 700 : 500)};
-  /* text-decoration: ${(props) =>
-    props.isActive && `underline 1px ${colors.red.dark}`}; */
   text-underline-offset: 4px;
   &:hover {
     cursor: pointer;
@@ -47,12 +45,12 @@ export const Topbar: FC = () => {
       overflow="hidden"
       display="flex"
       alignItems="center"
-      //boxShadow="rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;"
       padding="0px 24px"
       id="topbar"
     >
       <HStack alignItems="center" justifyContent="space-between" width="100%">
         <h4>stale news.</h4>
+        <Newspaper size={70} />
         <HStack>
           <StyledNavBtn
             isActive={Boolean(matchHeadlines)}
