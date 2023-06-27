@@ -3,8 +3,9 @@ export interface IArticle {
   title: string | null;
   description: string | null;
   url: string | null;
-  publishedAt: string | null;
+  publishedAt?: string | null;
   urlToImage: string | null;
+  content: string | null;
 }
 
 export interface IResponse {

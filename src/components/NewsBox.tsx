@@ -1,21 +1,30 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
-import { FC } from "react";
+import { FC, useState } from "react";
 import { IArticle } from "../api/types";
-import { Box, HStack, VStack, colors } from "../libs";
+import { Box, Dialog, HStack, VStack, colors } from "../libs";
 import styled from "@emotion/styled";
 import { Text } from "../libs";
 import { RiBookOpenLine } from "react-icons/ri";
 import { FiExternalLink } from "react-icons/fi";
 import { IconButton } from "../libs/ui/IconButton";
 import { IMAGE_PLACEHOLDER } from "../constants";
+import { DialogContent, StyledAnchor } from "./DialogContent";
+import Skeleton from "react-loading-skeleton";
+import { useFavoriteItem } from "../hooks/useFavoriteItem";
+import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 
-interface INewsBoxProps extends Partial<IArticle> {}
+export interface INewsBoxProps extends IArticle {}
 
-const StyledImage = styled.img`
+interface IStyledImageProps {
+  isLoaded?: boolean;
+}
+
+export const StyledImage = styled.img<IStyledImageProps>`
   filter: grayscale(100%);
   width: 100%;
   height: 100%;
   border-radius: 12px;
+  display: ${(props) => !props.isLoaded && "none"};
 `;
 
 export const NewsBox: FC<INewsBoxProps> = ({
@@ -24,14 +33,12 @@ export const NewsBox: FC<INewsBoxProps> = ({
   description,
   urlToImage,
   url,
+  content,
 }) => {
-  const handleRedirect = () => {
-    if (!url) {
-      return;
-    }
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const { handleSetFavorite, isFavorite } = useFavoriteItem(title ?? "");
+  const imgUrl = urlToImage ?? IMAGE_PLACEHOLDER;
 
-    window.location.replace(url);
-  };
   return (
     <Box
       boxShadow="rgba(0, 0, 0, 0.05) 10px 10px 15px"
@@ -44,9 +51,12 @@ export const NewsBox: FC<INewsBoxProps> = ({
       <VStack height="100%">
         <Box width={"100%"} height="200px" borderRadius={"12px"}>
           <StyledImage
-            src={urlToImage ?? IMAGE_PLACEHOLDER}
+            src={imgUrl}
             onError={(e) => (e.currentTarget.src = IMAGE_PLACEHOLDER)}
+            onLoad={() => setIsImageLoaded(true)}
+            isLoaded={isImageLoaded}
           />
+          {!isImageLoaded && <Skeleton height={"100%"} borderRadius={"12px"} />}
         </Box>
         <Text color={colors.red.regular} as={"h6"}>
           {title}
@@ -66,12 +76,44 @@ export const NewsBox: FC<INewsBoxProps> = ({
         </Box>
       </VStack>
       <HStack alignSelf="end">
+        <Dialog
+          trigger={
+            <IconButton
+              icon={<RiBookOpenLine color={colors.red.light} size={20} />}
+            />
+          }
+        >
+          <DialogContent
+            urlToImage={urlToImage}
+            content={content}
+            title={title}
+            author={author}
+            url={url}
+          />
+        </Dialog>
         <IconButton
-          icon={<RiBookOpenLine color={colors.red.light} size={20} />}
+          icon={
+            <StyledAnchor href={url ?? ""} target="_blank">
+              <FiExternalLink color={colors.red.light} size={20} />
+            </StyledAnchor>
+          }
         />
         <IconButton
-          icon={<FiExternalLink color={colors.red.light} size={20} />}
-          onClick={() => handleRedirect()}
+          onClick={() =>
+            handleSetFavorite({
+              urlToImage,
+              url,
+              author,
+              content,
+            })
+          }
+          icon={
+            isFavorite ? (
+              <AiFillStar color={colors.red.light} size={20} />
+            ) : (
+              <AiOutlineStar color={colors.red.light} size={20} />
+            )
+          }
         />
       </HStack>
     </Box>

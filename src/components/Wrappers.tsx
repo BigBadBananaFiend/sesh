@@ -48,10 +48,17 @@ export const AppWrapper: FC = () => {
   );
 };
 
-export const NewsWrapper = styled(Box)`
+interface INewsWrapperProps {
+  shouldExpand: boolean;
+}
+
+export const NewsWrapper = styled(Box)<INewsWrapperProps>`
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: repeat(
+    auto-fit,
+    ${(props) => (props.shouldExpand ? "minmax(500px, 1fr)" : "500px")}
+  );
   grid-template-rows: auto;
   justify-items: center;
   gap: 40px;

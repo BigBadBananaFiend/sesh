@@ -23,6 +23,7 @@ const StyledNavBtn = styled("button")<IStyledNavBtnProps>`
 export const Topbar: FC = () => {
   const matchHeadlines = useMatch(routes.headlines);
   const matchSearch = useMatch(routes.search);
+  const matchFavorites = useMatch(routes.favorites);
   const navigate = useNavigate();
 
   const handleNavigateToHeadlines = () => {
@@ -34,6 +35,12 @@ export const Topbar: FC = () => {
   const handleNavigateToSearch = () => {
     if (!matchSearch) {
       navigate(routes.search);
+    }
+  };
+
+  const handleNavigateToFavs = () => {
+    if (!matchFavorites) {
+      navigate(routes.favorites);
     }
   };
 
@@ -63,6 +70,12 @@ export const Topbar: FC = () => {
             onClick={() => handleNavigateToSearch()}
           >
             search
+          </StyledNavBtn>
+          <StyledNavBtn
+            isActive={Boolean(matchFavorites)}
+            onClick={() => handleNavigateToFavs()}
+          >
+            favs
           </StyledNavBtn>
         </HStack>
       </HStack>
