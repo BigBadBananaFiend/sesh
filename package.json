@@ -8,13 +8,15 @@
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "deps": "npm install && cd ./robot && npm install && cd ../"
+    "deps": "npm install && cd ./robot && npm install && cd ../",
+    "create-sesh": "concurrently -n server,test \"npm run dev\" \"sleep 10 && cd ./robot && npx Playwright test ...\""
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@radix-ui/react-dialog": "^1.0.4",
     "axios": "^1.4.0",
+    "concurrently": "^8.2.0",
     "emotion-reset": "^3.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

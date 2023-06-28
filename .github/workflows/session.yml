@@ -1,9 +1,7 @@
 name: Session creation
 on:
-  push:
-    branches: [main, master]
-  pull_request:
-    branches: [main, master]
+  schedule:
+    - cron: "0 17 * * *"
 jobs:
   session:
     timeout-minutes: 60
@@ -15,12 +13,10 @@ jobs:
           node-version: 18
       - name: Install dependencies
         run: npm run deps
-      - name: Build app
-        run: npm run dev
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Create session
-        run: npx playwright test
+        run: npm run create-sesh
       - uses: actions/upload-artifact@v3
         if: always()
         with:
