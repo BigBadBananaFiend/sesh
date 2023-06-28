@@ -47,6 +47,7 @@ export const NewsBox: FC<INewsBoxProps> = ({
       width="100%"
       display="flex"
       flexDirection="column"
+      data-testid="article-container"
     >
       <VStack height="100%">
         <Box width={"100%"} height="200px" borderRadius={"12px"}>
@@ -79,6 +80,7 @@ export const NewsBox: FC<INewsBoxProps> = ({
         <Dialog
           trigger={
             <IconButton
+              data-testid="article-open"
               icon={<RiBookOpenLine color={colors.red.light} size={20} />}
             />
           }
@@ -92,6 +94,7 @@ export const NewsBox: FC<INewsBoxProps> = ({
           />
         </Dialog>
         <IconButton
+          data-testid="article-href"
           icon={
             <StyledAnchor href={url ?? ""} target="_blank">
               <FiExternalLink color={colors.red.light} size={20} />
@@ -99,6 +102,7 @@ export const NewsBox: FC<INewsBoxProps> = ({
           }
         />
         <IconButton
+          data-testid="article-add-to-favorites"
           onClick={() =>
             handleSetFavorite({
               urlToImage,

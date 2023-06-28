@@ -54,24 +54,28 @@ export const Topbar: FC = () => {
       alignItems="center"
       padding="0px 24px"
       id="topbar"
+      data-testid="topbar"
     >
       <HStack alignItems="center" justifyContent="space-between" width="100%">
-        <h4>stale news.</h4>
+        <h4 data-testid="topbar-headline">stale news.</h4>
         <Newspaper size={70} />
         <HStack>
           <StyledNavBtn
+            data-testid="topbar-headlines-nav-button"
             isActive={Boolean(matchHeadlines)}
             onClick={() => handleNavigateToHeadlines()}
           >
             headlines
           </StyledNavBtn>
           <StyledNavBtn
+            data-testid="topbar-search-nav-button"
             isActive={Boolean(matchSearch)}
             onClick={() => handleNavigateToSearch()}
           >
             search
           </StyledNavBtn>
           <StyledNavBtn
+            data-testid="topbar-favorites-nav-button"
             isActive={Boolean(matchFavorites)}
             onClick={() => handleNavigateToFavs()}
           >

@@ -20,6 +20,10 @@ const StyledButton = styled.button`
   }
 `;
 
-export const IconButton: FC<IIconButton> = ({ icon, onClick }) => {
-  return <StyledButton onClick={onClick}>{icon}</StyledButton>;
+export const IconButton: FC<IIconButton> = ({ icon, onClick, ...props }) => {
+  return (
+    <StyledButton onClick={onClick} {...props}>
+      {icon}
+    </StyledButton>
+  );
 };

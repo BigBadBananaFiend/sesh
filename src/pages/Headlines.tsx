@@ -10,7 +10,7 @@ export const Headlines: FC = () => {
 
   return (
     <ContentWrapper>
-      <Text as={"h5"} color={colors.red.dark}>
+      <Text as={"h5"} color={colors.red.dark} data-testid="headlines-headline">
         today's top headlines.
       </Text>
       <NewsWrapper

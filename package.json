@@ -21,7 +21,8 @@
     "react-loading-skeleton": "^3.3.1",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.12.1",
-    "recoil": "^0.7.7"
+    "recoil": "^0.7.7",
+    "smartlook-client": "^8.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.37",

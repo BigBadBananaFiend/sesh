@@ -1,6 +1,7 @@
 import { useCallback, useMemo } from "react";
 import { useFavorites } from "./useFavorites";
 import { IArticle } from "../api/types";
+import Smartlook from "smartlook-client";
 
 const ARTICLES_KEY = "articles";
 
@@ -48,12 +49,19 @@ export const useFavoriteItem = (title: string) => {
 
       if (isFavorite) {
         deleteFavoriteItem();
+        Smartlook.track("removedFromFavorites", {
+          articleTitle: title,
+        });
         return;
       }
 
       addFavoriteItem({
         title,
         ...args,
+      });
+
+      Smartlook.track("addedToFavorites", {
+        articleTitle: title,
       });
     },
     [isFavorite, addFavoriteItem, deleteFavoriteItem, hash, title]

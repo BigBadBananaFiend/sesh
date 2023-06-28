@@ -24,6 +24,7 @@ export const Text: FC<ITextProps> = ({
   color,
   lineHeight,
   children,
+  ...props
 }: ITextProps) => {
   const component = as ?? "span";
 
@@ -34,6 +35,7 @@ export const Text: FC<ITextProps> = ({
       fontWeight={fontWeight}
       color={color}
       lineHeight={lineHeight}
+      {...props}
     >
       {children}
     </StyledText>

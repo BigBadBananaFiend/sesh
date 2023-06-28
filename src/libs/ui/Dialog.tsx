@@ -56,7 +56,7 @@ export const Dialog: FC<IDialogProps> = ({ trigger, children }) => (
     <RadixDialog.Portal>
       <StyledOveray />
       <StyledContent>
-        <StyledClose>
+        <StyledClose data-testid="dialog-close">
           <AiOutlineClose color={colors.red.light} />
         </StyledClose>
         {children}

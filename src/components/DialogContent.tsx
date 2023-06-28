@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { INewsBoxProps, StyledImage } from ".";
 import { Box, HStack, Text, VStack, colors } from "../libs";
 import { IMAGE_PLACEHOLDER } from "../constants";
@@ -8,6 +8,7 @@ import Skeleton from "react-loading-skeleton";
 import { IconButton } from "../libs/ui/IconButton";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { useFavoriteItem } from "../hooks/useFavoriteItem";
+import Smartlook from "smartlook-client";
 
 interface IDialogContentProps extends Omit<INewsBoxProps, "description"> {}
 
@@ -28,6 +29,14 @@ export const DialogContent: FC<IDialogContentProps> = ({
   const { isFavorite, handleSetFavorite } = useFavoriteItem(title ?? "");
   const imgUrl = urlToImage ?? IMAGE_PLACEHOLDER;
 
+  useEffect(() => {
+    Smartlook.track("dialogOpen", {});
+
+    return () => {
+      Smartlook.track("dialogClose", {});
+    };
+  }, []);
+
   return (
     <VStack>
       <Box width={"100%"} height="200px">
@@ -39,7 +48,7 @@ export const DialogContent: FC<IDialogContentProps> = ({
         />
         {!isImageLoaded && <Skeleton height={"100%"} borderRadius={"12px"} />}
       </Box>
-      <Text as={"h5"} color={colors.red.dark}>
+      <Text as={"h5"} color={colors.red.dark} data-testid="dialog-headline">
         {title}
       </Text>
       <Box display="inline-block">
@@ -52,13 +61,18 @@ export const DialogContent: FC<IDialogContentProps> = ({
       <HStack justifyContent={"space-between"} alignItems={"center"}>
         {!url && <Text as={"span"}>Full story not available</Text>}
         {url && (
-          <StyledAnchor href={url} target="_blank">
+          <StyledAnchor
+            href={url}
+            target="_blank"
+            data-testid="dialog-article-href"
+          >
             <Text as={"span"} color={colors.red.regular}>
               Read the whole story
             </Text>
           </StyledAnchor>
         )}
         <IconButton
+          data-testid="dialog-add-to-favorites"
           onClick={() =>
             handleSetFavorite({
               urlToImage,

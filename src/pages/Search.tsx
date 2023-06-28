@@ -24,11 +24,12 @@ export const Search: FC = () => {
 
   return (
     <ContentWrapper>
-      <Text as={"h5"} color={colors.red.dark}>
+      <Text as={"h5"} color={colors.red.dark} data-testid="search-headline">
         search headlines.
       </Text>
       <Box display={"flex"} width="600px">
         <Input
+          data-testid="search-input"
           startAddon={<AiOutlineSearch size={25} />}
           value={value}
           onChange={(e) => setValue(e.currentTarget.value)}
