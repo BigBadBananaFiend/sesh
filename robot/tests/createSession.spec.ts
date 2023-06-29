@@ -7,7 +7,6 @@ test("Create session", async ({ page }) => {
   await page.goto(BASE_URL);
 
   await sesh.articleOpen.nth(0).click();
-  await page.waitForRequest("https://web-writer.alfa.smartlook.cloud/**");
   await sesh.dialogHeadline.click();
   await sesh.dialogAddToFavorites.click();
   await sesh.dialogClose.click();
