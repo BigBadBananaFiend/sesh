@@ -17,7 +17,7 @@ function App() {
 
     const forceHoldRobot = async () => {
       const dispatch = async () => {
-        await new Promise((res) => setTimeout(res, 2000));
+        await new Promise((res) => setTimeout(res, 5000));
         const e = new Event("forward");
         window.dispatchEvent(e);
       };
