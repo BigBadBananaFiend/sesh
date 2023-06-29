@@ -1,6 +1,7 @@
 name: Session creation
 on:
   schedule:
+    - cron: "* 17 * * *"
     - cron: "* 4 * * *"
   workflow_dispatch:
 jobs:
@@ -14,7 +15,7 @@ jobs:
       - name: Install dependencies
         run: npm run deps
       - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+        run: npx playwright install --with-deps chromium
       - name: Create session
         run: npm run create-sesh
       - uses: actions/upload-artifact@v3
