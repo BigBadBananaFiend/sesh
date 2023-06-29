@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import { INewsBoxProps, StyledImage } from ".";
 import { Box, HStack, Text, VStack, colors } from "../libs";
 import { IMAGE_PLACEHOLDER } from "../constants";
@@ -7,6 +7,7 @@ import styled from "@emotion/styled";
 import Skeleton from "react-loading-skeleton";
 import { IconButton } from "../libs/ui/IconButton";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
+import { FaRegCopy } from "react-icons/fa";
 import { useFavoriteItem } from "../hooks/useFavoriteItem";
 import Smartlook from "smartlook-client";
 
@@ -28,6 +29,12 @@ export const DialogContent: FC<IDialogContentProps> = ({
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const { isFavorite, handleSetFavorite } = useFavoriteItem(title ?? "");
   const imgUrl = urlToImage ?? IMAGE_PLACEHOLDER;
+  const contentRef = useRef<HTMLParagraphElement>(null);
+
+  const handleCopyContent = () => {
+    navigator.clipboard.writeText(contentRef.current?.innerText ?? "");
+    Smartlook.track("textCopied", {});
+  };
 
   useEffect(() => {
     Smartlook.track("dialogOpen", {});
@@ -57,7 +64,7 @@ export const DialogContent: FC<IDialogContentProps> = ({
         </Text>
         <Text>{author ?? "Unknown"}</Text>
       </Box>
-      <Text as={"p"}>{content}</Text>
+      <p ref={contentRef}>{content}</p>
       <HStack justifyContent={"space-between"} alignItems={"center"}>
         {!url && <Text as={"span"}>Full story not available</Text>}
         {url && (
@@ -71,24 +78,31 @@ export const DialogContent: FC<IDialogContentProps> = ({
             </Text>
           </StyledAnchor>
         )}
-        <IconButton
-          data-testid="dialog-add-to-favorites"
-          onClick={() =>
-            handleSetFavorite({
-              urlToImage,
-              url,
-              author,
-              content,
-            })
-          }
-          icon={
-            isFavorite ? (
-              <AiFillStar color={colors.red.light} size={20} />
-            ) : (
-              <AiOutlineStar color={colors.red.light} size={20} />
-            )
-          }
-        />
+        <HStack>
+          <IconButton
+            data-testid="dialog-copy-text"
+            onClick={() => handleCopyContent()}
+            icon={<FaRegCopy color={colors.red.light} size={20} />}
+          />
+          <IconButton
+            data-testid="dialog-add-to-favorites"
+            onClick={() =>
+              handleSetFavorite({
+                urlToImage,
+                url,
+                author,
+                content,
+              })
+            }
+            icon={
+              isFavorite ? (
+                <AiFillStar color={colors.red.light} size={20} />
+              ) : (
+                <AiOutlineStar color={colors.red.light} size={20} />
+              )
+            }
+          />
+        </HStack>
       </HStack>
     </VStack>
   );

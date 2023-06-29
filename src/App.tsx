@@ -10,8 +10,21 @@ function App() {
   useEffect(() => {
     Smartlook.identify(1738, {
       name: "Charlie Parker",
-      email: "bird@bop.com",
+      email: "charlie.parker@bird.com",
     });
+
+    Smartlook.track("appOpened", {});
+
+    const forceHoldRobot = async () => {
+      const dispatch = async () => {
+        await new Promise((res) => setTimeout(res, 2000));
+        const e = new Event("forward");
+        window.dispatchEvent(e);
+      };
+      await dispatch();
+    };
+
+    forceHoldRobot();
   }, []);
 
   return (

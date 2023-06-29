@@ -55,20 +55,18 @@ interface INewsWrapperProps {
 export const NewsWrapper = styled(Box)<INewsWrapperProps>`
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(
-    auto-fit,
-    ${(props) => (props.shouldExpand ? "minmax(500px, 1fr)" : "500px")}
-  );
+  grid-template-columns: repeat(auto-fit, minmax(300px, 400px));
   grid-template-rows: auto;
   justify-items: center;
   gap: 40px;
-  justify-content: start;
+  justify-content: center;
 `;
 
 export const ContentWrapper = styled(Box)`
   width: 100%;
   display: flex;
-  padding: 40px 80px;
+  padding: 60px 80px;
   flex-direction: column;
-  gap: 20px;
+  gap: 40px;
+  align-items: center;
 `;

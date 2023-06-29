@@ -6,11 +6,19 @@ test("Create session", async ({ page }) => {
   const sesh = new Sesh(page);
   await page.goto(BASE_URL);
 
+  const initWait = page.evaluate(() => {
+    return new Promise((res) => {
+      window.addEventListener("forward", res);
+    });
+  });
+
+  await initWait;
+
   await sesh.articleOpen.nth(0).click();
   await sesh.dialogHeadline.click();
   await sesh.dialogAddToFavorites.click();
+  await sesh.dialogCopyText.click();
   await sesh.dialogClose.click();
-  await page.waitForTimeout(10000);
 
   await sesh.topbarSearchNavButton.click();
   await sesh.searchInput.type(BITCOIN);
@@ -18,7 +26,6 @@ test("Create session", async ({ page }) => {
   await sesh.dialogAddToFavorites.click();
   await sesh.dialogClose.click();
   await sesh.searchInput.clear();
-  await page.waitForTimeout(10000);
 
   await sesh.searchInput.type(PREMIER_LEAUGE);
   await page.waitForRequest("https://newsapi.org/**");
@@ -26,9 +33,7 @@ test("Create session", async ({ page }) => {
   await sesh.dialogAddToFavorites.click();
   await sesh.dialogClose.click();
   await sesh.topbarFavoritesNavButton.click();
-  await page.waitForTimeout(10000);
 
   await sesh.favoritesHeadline.click();
   await sesh.articleOpen.nth(0).click();
-  await page.waitForTimeout(10000);
 });

@@ -6,6 +6,7 @@ export class Sesh {
   readonly dialogArticleHref: Locator;
   readonly dialogAddToFavorites: Locator;
   readonly dialogClose: Locator;
+  readonly dialogCopyText: Locator;
   readonly articleContainer: Locator;
   readonly articleHref: Locator;
   readonly articleAddToFavorites: Locator;
@@ -29,6 +30,7 @@ export class Sesh {
       '[data-testid="dialog-add-to-favorites"]'
     );
     this.dialogClose = page.locator('[data-testid="dialog-close"]');
+    this.dialogCopyText = page.locator('[data-testid="dialog-copy-text"]');
     this.articleContainer = page.locator('[data-testid="article-container"]');
     this.articleHref = page.locator('[data-testid="article-href"]');
     this.articleAddToFavorites = page.locator(
