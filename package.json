@@ -9,7 +9,7 @@
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "deps": "npm install && cd ./robot && npm install && cd ../",
-    "create-sesh": "concurrently --kill-others --success \"command-{test}\" -n server,test \"npm run dev\" \"sleep 10 && cd ./robot && npx playwright test --project=chromium ...\""
+    "create-sesh": "concurrently --kill-others -s first -n server,test \"npm run dev\" \"sleep 10 && cd ./robot && npx playwright test --ui --project=chromium ...\""
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -29,6 +29,7 @@
     "smartlook-client": "^8.2.0"
   },
   "devDependencies": {
+    "@types/node": "^20.3.2",
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
     "@typescript-eslint/eslint-plugin": "^5.59.0",
