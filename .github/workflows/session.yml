@@ -15,7 +15,7 @@ jobs:
       - name: Install dependencies
         run: npm run deps
       - name: Install Playwright
-        run: npm install @playwright/test
+        run: npm install @playwright/test@latest
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Create session
