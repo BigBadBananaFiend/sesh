@@ -15,7 +15,7 @@ jobs:
       - name: Install dependencies
         run: npm run deps
       - name: Install Playwright Browsers
-        run: npx playwright install --with-deps chromium
+        run: npx playwright install --with-deps
       - name: Create session
         run: npm run create-sesh
       - uses: actions/upload-artifact@v3
