@@ -9,7 +9,7 @@
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "deps": "npm install && cd ./robot && npm install && cd ../",
-    "create-sesh": "concurrently --kill-others -s first -n server,test \"npm run dev\" \"sleep 10 && cd ./robot && npx playwright test --project=chromium ...\""
+    "create-sesh": "concurrently --kill-others -s first -n server,test \"npm run dev\" \"sleep 10 && npx playwright test --project=chromium ...\""
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
