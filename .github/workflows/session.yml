@@ -14,6 +14,8 @@ jobs:
           node-version: 18
       - name: Install dependencies
         run: npm run deps
+      - name: Install Playwright
+        run: npm install @playwright/test
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Create session
