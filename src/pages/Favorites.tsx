@@ -1,10 +1,17 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { ContentWrapper, NewsWrapper, NewsBox } from "../components";
 import { colors, Text } from "../libs";
 import { useFavorites } from "../hooks/useFavorites";
 
 export const Favorites: FC = () => {
   const { favorites } = useFavorites();
+
+  useEffect(() => {
+    console.log("Log message");
+    console.warn("Warn message");
+    console.info("Info message");
+  }, []);
+
   return (
     <ContentWrapper>
       <Text as={"h5"} color={colors.red.dark} data-testid="favorites-headline">

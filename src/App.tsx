@@ -13,6 +13,13 @@ function App() {
       email: "charlie.parker@bird.com",
     });
 
+    Smartlook.record({
+      forms: true,
+      numbers: true,
+      emails: false,
+      ips: true,
+    });
+
     Smartlook.track("appOpened", {});
 
     const forceHoldRobot = async () => {
