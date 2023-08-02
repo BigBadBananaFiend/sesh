@@ -7,17 +7,9 @@ test("Create session", async ({ page }) => {
   const sesh = new Sesh(page);
   await page.goto(BASE_URL);
 
-  // const initWait = async () =>
-  //   page.evaluate(() => {
-  //     return new Promise((res) => {
-  //       window.addEventListener("forward", res);
-  //     });
-  //   });
-
-  // await initWait();
-
   await sesh.articleOpen.nth(0).click();
   await sesh.dialogHeadline.click();
+
   await sesh.dialogAddToFavorites.click();
   await sesh.dialogCopyText.click();
   await sesh.dialogClose.click();
@@ -47,4 +39,7 @@ test("Create session", async ({ page }) => {
 
   await sesh.articleAddToFavorites.first().click();
   await expect(sesh.articleContainer).toHaveCount(2);
+
+  await page.goto("https://google.com");
+  await page.waitForTimeout(1000);
 });

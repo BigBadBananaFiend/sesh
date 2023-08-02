@@ -10,6 +10,7 @@ export const Favorites: FC = () => {
     console.log("Log message");
     console.warn("Warn message");
     console.info("Info message");
+    console.debug("Verbose message");
   }, []);
 
   return (
